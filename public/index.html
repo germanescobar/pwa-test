@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f0fc03" />
+    <title>My PWA App</title>
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+    <h1>Welcome to My PWA!</h1>
+    <button id="toggle-notifications">Enable Notifications</button>
+    <button id="show-notification">Show Notification</button>
+    <button id="reload">Reload Page</button>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import * as firebase from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+      import * as messaging from "https://www.gstatic.com/firebasejs/10.11.1/firebase-messaging.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDaoT2IbXZwY7LhIWJUeSp13UKPqiMeDMM",
+        authDomain: "pwa-test-67e0f.firebaseapp.com",
+        projectId: "pwa-test-67e0f",
+        storageBucket: "pwa-test-67e0f.appspot.com",
+        messagingSenderId: "610586954348",
+        appId: "1:610586954348:web:0c7f1d49bfd463a0596649",
+        measurementId: "G-XT66JMVG56"
+      };
+    
+      // Initialize Firebase
+      var app = firebase.initializeApp(firebaseConfig);
+
+      const msg = messaging.getMessaging(app);
+
+      messaging.getToken(msg, { vapidKey: 'BEhitQ0ddBB0R3vTCL2VZ9EQgeoH6nVpyqKcNXX70Acdc2677RBZb1O-U9QH3RpVlzbyYdUPt2VQqaKxHTPUDGo' }).then((currentToken) => {
+          if (currentToken) {
+              // Send the token to your server
+              console.log('token', currentToken);
+          } else {
+              console.log('No Instance ID token available. Request permission to generate one.');
+          }
+      }).catch((err) => {
+          console.log('An error occurred while retrieving token. ', err);
+      });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
